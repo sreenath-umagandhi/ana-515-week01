@@ -1,0 +1,46 @@
+---
+title: "ANA 515 Assignment 01"
+author: Sreenath Umagandhi
+date: 10-20-2021
+output: 
+  html_document:
+    theme:
+      bootswatch: slate
+---
+
+```{r setup, include = FALSE}
+
+library(ggplot2)
+library(dplyr)
+```
+
+```{r, echo = TRUE}
+#https://raw.githubusercontent.com/fivethirtyeight/guns-data/master/full_data.csv'
+#I'm going to use the data set from this URL.
+
+url <- "https://raw.githubusercontent.com/fivethirtyeight/guns-data/master/full_data.csv"
+gun_deaths <- read.csv(url)
+glimpse(gun_deaths)
+```
+
+
+```{r, include = FALSE}
+#create subset of gun_deaths with the name youth
+youth <- gun_deaths %>% 
+  filter(age <= 65)
+```
+
+We have data about `r nrow(gun_deaths)` gun deaths. Only 
+`r nrow(gun_deaths) - nrow(youth)` are of age <= 65. The distribution of the remainder is shown
+below:
+
+``` {r, echo = TRUE}
+#***** output Plot *****
+```
+
+```{r, echo = TRUE}
+youth %>% 
+  ggplot(aes(age)) + 
+  geom_freqpoly(binwidth = 1)
+```
+
